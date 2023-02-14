@@ -1,0 +1,22 @@
+.button {
+  @include text-button;
+  width: 100%;
+  padding: 14px 20px 18px;
+  color: $color-white-default;
+  background-color: $color-dark-tangerine;
+  border-radius: 40px;
+  transition: all 0.3s ease;
+
+  &:hover,
+  &:focus {
+    background-color: $color-black;
+  }
+
+  &:active {
+    background-color: $color-matterhorn;
+  }
+
+  &:disabled {
+    background: rgba($color-dark-tangerine, 0.4);
+  }
+}
