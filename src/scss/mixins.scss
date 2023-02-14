@@ -1,0 +1,31 @@
+@mixin text-strong {
+  font-family: "Nekst";
+  font-style: normal;
+  font-weight: 900;
+  font-size: 54px;
+  line-height: 90%;
+}
+
+@mixin text-button {
+  font-family: "Nekst";
+  font-style: normal;
+  font-weight: 900;
+  font-size: 30px;
+  line-height: 36px;
+}
+
+@mixin text-label {
+  font-family: "Gilroy";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+@mixin text-input {
+  font-family: "Nekst";
+  font-style: normal;
+  font-weight: 900;
+  font-size: 30px;
+  line-height: 36px;
+}
