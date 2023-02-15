@@ -1,0 +1,104 @@
+.text-input {
+  display: flex;
+  flex-direction: column;
+
+  &.disabled {
+    opacity: 0.4;
+  }
+}
+
+.text-input__label {
+  @include text-label;
+
+  margin-bottom: 24px;
+  color: $color-matterhorn;
+}
+
+.text-input__wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.text-input__input {
+  @include text-input;
+
+  width: 100%;
+  padding: 14px 22px;
+  color: $color-matterhorn;
+  background-color: $color-ghost-white;
+  border: 2px solid transparent;
+  border-radius: 16px;
+  transition: all 0.3s ease;
+
+  &:active,
+  &:focus {
+    outline: none;
+    background-color: $color-white-default;
+    border: 2px solid $color-ghost-white;
+  }
+}
+
+.text-input__text {
+  @include text-input;
+
+  position: absolute;
+  top: 12px;
+  right: 24px;
+  color: $color-matterhorn;
+
+  &--bordered {
+    top: 7px;
+    right: 7px;
+    padding: 15px 17px;
+    font-size: 20px;
+    line-height: 120%;
+    background-color: $color-lavender;
+    border-radius: 16px;
+  }
+}
+
+.text-input__range {
+  position: absolute;
+  bottom: -9px;
+  left: 24px;
+  width: calc(100% - 48px);
+  height: 20px;
+}
+
+.text-input__range-picker {
+  position: absolute;
+  z-index: 2;
+  width: 20px;
+  height: 20px;
+  top: 0px;
+  left: 303px;
+  background-color: $color-dark-tangerine;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    transform: scale(1.2);
+  }
+}
+
+.text-input__range-active-line {
+  position: absolute;
+  z-index: 1;
+  top: 9px;
+  left: 0;
+  width: 311px;
+  height: 2px;
+  background-color: $color-dark-tangerine;
+  border-top: 1px solid $color-dark-tangerine;
+  border-top-left-radius: 2px;
+}
+
+.text-input__range-line {
+  position: absolute;
+  top: 10px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: $color-gainsboro;
+}
