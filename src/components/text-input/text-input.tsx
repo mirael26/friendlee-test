@@ -1,15 +1,21 @@
 import * as React from "react";
+import { useState, useEffect } from "react";
 import { addPriceSeparators } from "../../utils";
+import RangePicker from "../range-picker/range-picker";
 
 interface ITextInputProps {
   id: string;
   name: string;
   type?: "text" | "number" | "email" | "address";
   label?: string;
-  value?: string;
+  value?: number;
+  minValue: number;
+  maxValue: number;
   text?: string;
-  textStyle?: "bordered";
+  withPercent?: boolean;
+  relativeAmount?: number;
   currencySign?: string;
+  changeValue: (newValue: number) => void;
 }
 
 const TextInput = (props: ITextInputProps) => {
@@ -18,14 +24,47 @@ const TextInput = (props: ITextInputProps) => {
     name,
     type = "text",
     label = null,
-    value = "",
+    value = props.minValue,
+    minValue,
+    maxValue,
     text = null,
-    textStyle = null,
+    withPercent = false,
+    relativeAmount,
     currencySign = null,
+    changeValue,
   } = props;
 
+  const [inputedValue, setInputedValue] = useState(null);
+
+  useEffect(() => {
+    if (value < minValue) {
+      changeValue(minValue);
+    } else if (value > maxValue) {
+      changeValue(maxValue);
+    }
+  }, [minValue, maxValue]);
+
+  useEffect(() => {
+    setInputedValue(value);
+  }, [value]);
+
+  const handleInputBlur = () => {
+    if (inputedValue < minValue) {
+      changeValue(minValue);
+    } else if (inputedValue > maxValue) {
+      changeValue(maxValue);
+    } else {
+      changeValue(inputedValue);
+    }
+  };
+
   const currencySignText = currencySign ? ` ${currencySign}` : "";
-  const textStyleClass = textStyle ? ` text-input__text--${textStyle}` : "";
+  const textStyleClass = withPercent ? ` text-input__text--bordered` : "";
+  const percent =
+    relativeAmount && withPercent
+      ? Math.round((value / relativeAmount) * 100)
+      : null;
+  const isText = text || percent;
 
   return (
     <div className="text-input">
@@ -40,18 +79,27 @@ const TextInput = (props: ITextInputProps) => {
           className="text-input__input"
           id={id}
           name={name}
-          value={addPriceSeparators(+value) + currencySignText}
+          value={addPriceSeparators(inputedValue) + currencySignText}
           type={type}
+          onChange={(evt) =>
+            setInputedValue(+evt.target.value.replace(/[^0-9]/g, ""))
+          }
+          onBlur={handleInputBlur}
         />
 
-        {text && (
-          <span className={"text-input__text" + textStyleClass}>{text}</span>
+        {isText && (
+          <span className={"text-input__text" + textStyleClass}>
+            {percent ? percent + " %" : text}
+          </span>
         )}
 
         <div className="text-input__range">
-          <div className="text-input__range-picker"></div>
-          <div className="text-input__range-active-line"></div>
-          <div className="text-input__range-line"></div>
+          <RangePicker
+            value={value}
+            minValue={minValue}
+            maxValue={maxValue}
+            changeValue={changeValue}
+          />
         </div>
       </div>
     </div>
