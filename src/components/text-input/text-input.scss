@@ -23,7 +23,7 @@
   @include text-input;
 
   width: 100%;
-  padding: 14px 22px;
+  padding: 15px 21px 13px;
   color: $color-matterhorn;
   background-color: $color-ghost-white;
   outline: none;
@@ -42,12 +42,12 @@
   @include text-input;
 
   position: absolute;
-  top: 12px;
+  top: 16px;
   right: 24px;
   color: $color-matterhorn;
 
   &--bordered {
-    top: 7px;
+    top: 8px;
     right: 7px;
     padding: 15px 17px;
     font-size: 20px;
@@ -112,18 +112,18 @@
   .text-input__input {
     font-size: 22px;
     line-height: 20px;
-    padding: 15px 22px;
+    padding: 16px 17px 14px;
   }
 
   .text-input__text {
-    top: 17px;
-    right: 20px;
+    top: 21px;
+    right: 21px;
     font-size: 22px;
     line-height: 20px;
 
     &--bordered {
       top: 7px;
-      right: 6px;
+      right: 7px;
       padding: 14px 15px;
       font-size: 22px;
       line-height: 20px;

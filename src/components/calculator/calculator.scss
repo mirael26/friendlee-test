@@ -2,27 +2,28 @@
   width: 100%;
   max-width: 1440px;
   margin: 0 auto;
-  padding: 213px 48px 100px;
+  padding: 216px 48px 100px;
 }
 
 .calculator__title {
   @include text-strong;
 
   max-width: 753px;
-  margin-bottom: 32px;
+  margin-bottom: 30px;
   color: $color-black;
 }
 
 .calculator__form {
   display: grid;
   grid-template: auto auto / repeat(3, 1fr);
-  gap: 51px 32px;
+  align-items: start;
+  gap: 53px 32px;
   margin-bottom: 51px;
 }
 
 .calculator__result-title {
   @include text-label;
-  margin-bottom: 8px;
+  margin-bottom: 13px;
   color: $color-matterhorn;
 }
 
@@ -37,21 +38,21 @@
     content: "₽";
     position: absolute;
     top: -5px;
-    right: -46px;
+    right: -47px;
   }
 }
 
 .calculator__button {
-  margin-top: 10px;
+  margin-top: 8px;
 }
 
 @media (max-width: ($tablet-breakpoint-2 - 1)) {
   .calculator {
-    padding: 64px 36px 100px;
+    padding: 67px 36px 100px;
   }
 
   .calculator__title {
-    margin-bottom: 44px;
+    margin-bottom: 42px;
   }
 
   .calculator__form {
@@ -65,29 +66,29 @@
 
   .calculator__result {
     grid-column: auto;
-    margin: 5px 0 5px;
+    margin: 7px 0 2px;
   }
 
   .calculator__button {
-    width: fit-content;
+    max-width: 345px;
     margin: 0;
   }
 }
 
 @media (max-width: ($mobile-breakpoint - 1)) {
   .calculator {
-    padding: 44px 20px 30px;
+    padding: 47px 20px 30px;
   }
 
   .calculator__title {
     max-width: 70%;
-    margin-bottom: 32px;
+    margin-bottom: 30px;
     font-size: 34px;
   }
 
   .calculator__form {
     grid-template: auto / 1fr;
-    gap: 25px 25px;
+    gap: 24px 25px;
   }
 
   .calculator__form > * {
@@ -95,7 +96,7 @@
   }
 
   .calculator__result {
-    margin-bottom: 4px;
+    margin: 2px 0 3px;
   }
 
   .calculator__result-title {
@@ -116,8 +117,7 @@
 
   .calculator__button {
     width: 100%;
-    max-width: 345px;
-    margin: 3px 0 0;
+    margin: 4px 0 0;
     padding: 20px 24px;
     font-size: 22px;
     line-height: 20px;

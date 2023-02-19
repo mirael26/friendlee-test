@@ -34,7 +34,7 @@ const Calculator = () => {
           name="lease term"
           label="Срок лизинга"
           value="60"
-          text="мес"
+          text="мес."
         />
 
         <div className="calculator__result">
