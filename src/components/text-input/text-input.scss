@@ -26,13 +26,13 @@
   padding: 14px 22px;
   color: $color-matterhorn;
   background-color: $color-ghost-white;
+  outline: none;
   border: 2px solid transparent;
   border-radius: 16px;
   transition: all 0.3s ease;
 
   &:active,
   &:focus {
-    outline: none;
     background-color: $color-white-default;
     border: 2px solid $color-ghost-white;
   }
@@ -71,7 +71,7 @@
   width: 20px;
   height: 20px;
   top: 0px;
-  left: 303px;
+  left: 142px;
   background-color: $color-dark-tangerine;
   border-radius: 50%;
   cursor: pointer;
@@ -87,7 +87,7 @@
   z-index: 1;
   top: 9px;
   left: 0;
-  width: 311px;
+  width: 150px;
   height: 2px;
   background-color: $color-dark-tangerine;
   border-top: 1px solid $color-dark-tangerine;
@@ -101,4 +101,32 @@
   width: 100%;
   height: 1px;
   background-color: $color-gainsboro;
+}
+
+@media (max-width: ($mobile-breakpoint - 1)) {
+  .text-input__label {
+    margin-bottom: 8px;
+    font-size: 14px;
+  }
+
+  .text-input__input {
+    font-size: 22px;
+    line-height: 20px;
+    padding: 15px 22px;
+  }
+
+  .text-input__text {
+    top: 17px;
+    right: 20px;
+    font-size: 22px;
+    line-height: 20px;
+
+    &--bordered {
+      top: 7px;
+      right: 6px;
+      padding: 14px 15px;
+      font-size: 22px;
+      line-height: 20px;
+    }
+  }
 }
