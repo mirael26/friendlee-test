@@ -558,8 +558,34 @@ var RangePicker = function (props) {
         document.addEventListener("mousemove", onMouseMove);
         document.addEventListener("mouseup", onMouseUp);
     };
+    var onTouchStart = function (touchEvt) {
+        var pickerWidth = picker.current.clientWidth;
+        var total = line.current.clientWidth - pickerWidth;
+        var startCoords = touchEvt.changedTouches[0].clientX;
+        var onTouchMove = function (moveEvt) {
+            var endCoords = moveEvt.changedTouches[moveEvt.changedTouches.length - 1].clientX;
+            var shift = startCoords - endCoords;
+            var shiftValue = Math.round((shift / total) * (maxValue - minValue));
+            var newValue = value - shiftValue;
+            if (newValue < minValue) {
+                changeValue(minValue);
+            }
+            else if (newValue > maxValue) {
+                changeValue(maxValue);
+            }
+            else {
+                changeValue(newValue);
+            }
+        };
+        var onTouchEnd = function () {
+            document.removeEventListener("touchmove", onTouchMove);
+            document.removeEventListener("touchend", onTouchEnd);
+        };
+        document.addEventListener("touchmove", onTouchMove);
+        document.addEventListener("touchend", onTouchEnd);
+    };
     return (react.createElement("div", { className: "range-picker" },
-        react.createElement("div", { className: "range-picker__picker", ref: picker, onMouseDown: onMouseDown }),
+        react.createElement("div", { className: "range-picker__picker", ref: picker, onMouseDown: onMouseDown, onTouchStart: onTouchStart }),
         react.createElement("div", { className: "range-picker__active-line", ref: activeLine }),
         react.createElement("div", { className: "range-picker__line", ref: line })));
 };
