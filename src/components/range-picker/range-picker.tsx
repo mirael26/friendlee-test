@@ -33,7 +33,7 @@ const RangePicker = (props: IRangePickerProps) => {
 
     const onMouseMove = (moveEvt: MouseEvent) => {
       moveEvt.preventDefault();
-      let shift = startCoords - moveEvt.clientX;
+      const shift = startCoords - moveEvt.clientX;
       const shiftValue = Math.round((shift / total) * (maxValue - minValue));
       const newValue = value - shiftValue;
 
@@ -55,12 +55,42 @@ const RangePicker = (props: IRangePickerProps) => {
     document.addEventListener("mouseup", onMouseUp);
   };
 
+  const onTouchStart = (touchEvt: React.TouchEvent) => {
+    const pickerWidth = picker.current.clientWidth;
+    const total = line.current.clientWidth - pickerWidth;
+    const startCoords = touchEvt.changedTouches[0].clientX;
+
+    const onTouchMove = (moveEvt: TouchEvent) => {
+      const endCoords = moveEvt.changedTouches[moveEvt.changedTouches.length - 1].clientX;
+      const shift = startCoords - endCoords;
+      const shiftValue = Math.round((shift / total) * (maxValue - minValue));
+      const newValue = value - shiftValue;
+
+      if (newValue < minValue) {
+        changeValue(minValue);
+      } else if (newValue > maxValue) {
+        changeValue(maxValue);
+      } else {
+        changeValue(newValue);
+      }
+    };
+
+    const onTouchEnd = () => {
+      document.removeEventListener("touchmove", onTouchMove);
+      document.removeEventListener("touchend", onTouchEnd);
+    };
+
+    document.addEventListener("touchmove", onTouchMove);
+    document.addEventListener("touchend", onTouchEnd);
+  };
+
   return (
     <div className="range-picker">
       <div
         className="range-picker__picker"
         ref={picker}
         onMouseDown={onMouseDown}
+        onTouchStart={onTouchStart}
       ></div>
 
       <div className="range-picker__active-line" ref={activeLine}></div>
